@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import AtomIcon from './AtomIcon'
 
 const NAV = [
+  { to: '/marcas',     label: 'Marcas' },
   { to: '/ecosistema', label: 'Ecosistema' },
   { to: '/filosofia',  label: 'Filosofía' },
 ]
