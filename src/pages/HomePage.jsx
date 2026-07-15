@@ -253,7 +253,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-12 gap-y-14">
             {[
-              { n: '16', l: 'Canales\nYouTube'        },
+              { n: '20', l: 'Marcas\ndel ecosistema'  },
               { n: '8',  l: 'Proyectos\nen marcha'    },
               { n: '6',  l: 'Metodologías\npropias'   },
               { n: '18', l: 'Dimensiones\nde libertad' },
@@ -297,9 +297,9 @@ export default function HomePage() {
         <div className="max-w-[980px] mx-auto">
           <div className="reveal flex items-end justify-between mb-14 flex-wrap gap-6">
             <div>
-              <p className="text-[11px] font-semibold tracking-[.22em] uppercase text-[#ABABAB] mb-4">Canales de YouTube</p>
+              <p className="text-[11px] font-semibold tracking-[.22em] uppercase text-[#ABABAB] mb-4">Marcas del ecosistema</p>
               <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontWeight: 800, letterSpacing: '-0.022em', lineHeight: 1.08, color: '#0A0A0A' }}>
-                16 canales.<br />Una narrativa.
+                Cada marca, su canal.<br />Una narrativa.
               </h2>
             </div>
             <button
@@ -337,7 +337,7 @@ export default function HomePage() {
               </a>
             ))}
             <div className="px-6 py-4 text-[13px] text-[#D8D8D8]">
-              + 13 canales en construcción
+              + el resto del ecosistema en construcción
             </div>
           </div>
         </div>
