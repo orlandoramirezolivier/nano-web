@@ -1,0 +1,568 @@
+<title>Orlando Ramírez — Tu Primer Empleado Digital</title>
+<style>
+  :root{
+    --ink:#0B0B0D;
+    --ink-2:#151517;
+    --paper:#F5F5F5;
+    --paper-2:#ECECEE;
+    --graphite:#1D1D1F;
+    --steel:#86868B;
+    --steel-2:#C7C7CC;
+    --volt:#00B4D8;
+    --volt-dim:#0092B0;
+    --volt-ink:#003C48;
+    --volt-glow:rgba(0,180,216,.35);
+    --signal:#30D158;
+    --hair:rgba(0,0,0,.09);
+    --hair-dark:rgba(255,255,255,.12);
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--graphite);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;}
+  h1,h2,h3,p{margin:0;}
+  h1,h2,h3{text-wrap:balance;}
+  .wrap{max-width:1080px;margin:0 auto;padding-left:24px;padding-right:24px;}
+  @media (min-width:900px){ .wrap{padding-left:56px;padding-right:56px;} }
+
+  /* ---------- nav ---------- */
+  nav.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,11,13,.72);
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    border-bottom:1px solid var(--hair-dark);
+  }
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:52px;}
+  .brand-lockup{display:flex;align-items:baseline;gap:10px;white-space:nowrap;}
+  .brand-lockup .t{font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#fff;}
+  .brand-lockup .t em{font-style:normal;color:var(--volt);}
+  .brand-lockup .x{color:var(--steel);font-size:12px;}
+  .brand-lockup .c{font-size:13px;color:var(--steel-2);}
+  .navlinks{display:none;gap:28px;font-size:12.5px;color:var(--steel-2);}
+  .navlinks a{color:var(--steel-2);text-decoration:none;transition:color .15s;}
+  .navlinks a:hover{color:#fff;}
+  @media (min-width:760px){ .navlinks{display:flex;} }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--sans);font-size:15px;font-weight:600;
+    padding:13px 26px;border-radius:100px;border:1px solid transparent;
+    cursor:pointer;text-decoration:none;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-volt{background:var(--volt);color:#00181d;box-shadow:0 8px 24px -8px var(--volt-glow);}
+  .btn-volt:hover{background:#12c3e6;}
+  .btn-ghost-dark{background:transparent;color:#fff;border-color:rgba(255,255,255,.28);}
+  .btn-ghost-dark:hover{border-color:rgba(255,255,255,.6);}
+  .btn-ghost-light{background:transparent;color:var(--graphite);border-color:rgba(0,0,0,.16);}
+  .btn-ghost-light:hover{border-color:rgba(0,0,0,.4);}
+  .btn-lg{padding:17px 34px;font-size:17px;}
+
+  /* ---------- sections generic ---------- */
+  section{position:relative;padding:96px 0;}
+  section.dark{background:var(--ink);color:#fff;}
+  section.ink2{background:var(--ink-2);color:#fff;}
+  section.light{background:var(--paper);color:var(--graphite);}
+  section.light-2{background:var(--paper-2);color:var(--graphite);}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--volt);margin-bottom:16px;display:block;
+  }
+  .lead{font-size:clamp(17px,1.6vw,20px);line-height:1.55;max-width:640px;}
+  .dark .lead, .ink2 .lead{color:rgba(255,255,255,.72);}
+  .light .lead, .light-2 .lead{color:var(--steel);}
+
+  /* ---------- hero ---------- */
+  #hero{
+    min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    background:var(--ink);color:#fff;padding-top:120px;padding-bottom:80px;overflow:hidden;
+  }
+  #hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55;}
+  #hero .content{position:relative;z-index:2;}
+  .h-headline{
+    font-size:clamp(40px,7vw,84px);font-weight:700;letter-spacing:-0.03em;line-height:1.02;
+    max-width:920px;
+  }
+  .h-headline .accent{color:var(--volt);}
+  .h-sub{margin-top:26px;font-size:clamp(17px,2vw,21px);color:rgba(255,255,255,.68);max-width:560px;line-height:1.5;}
+  .h-ctas{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;}
+  .h-scroll{margin-top:88px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,.45);}
+  .h-scroll .line{width:32px;height:1px;background:rgba(255,255,255,.3);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.vis{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+  /* ---------- stat row (auditoría) ---------- */
+  .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:16px;overflow:hidden;margin-top:48px;}
+  @media (min-width:700px){ .stat-row{grid-template-columns:repeat(4,1fr);} }
+  .stat-cell{background:var(--paper);padding:26px 20px;}
+  .stat-num{font-family:var(--mono);font-size:clamp(30px,4vw,40px);font-weight:600;font-variant-numeric:tabular-nums;color:var(--graphite);}
+  .stat-num small{font-size:16px;color:var(--steel);font-weight:500;}
+  .stat-label{margin-top:6px;font-size:12.5px;color:var(--steel);letter-spacing:.02em;}
+  .quote-block{
+    margin-top:44px;border-left:3px solid var(--volt);padding-left:22px;
+    font-size:clamp(19px,2.4vw,24px);line-height:1.4;color:var(--graphite);font-weight:500;
+  }
+  .quote-block cite{display:block;margin-top:10px;font-size:13px;font-style:normal;color:var(--steel);}
+  .pivot-line{margin-top:38px;font-size:clamp(20px,2.6vw,27px);font-weight:600;letter-spacing:-0.01em;line-height:1.35;}
+  .pivot-line .strike{color:var(--steel-2);text-decoration:line-through;text-decoration-color:var(--steel-2);}
+  .pivot-line .live{color:var(--volt-dim);}
+
+  /* ---------- problema ---------- */
+  .ask-list{margin-top:44px;display:flex;flex-direction:column;}
+  .ask{padding:26px 0;border-top:1px solid var(--hair-dark);font-size:clamp(18px,2.2vw,23px);line-height:1.45;color:rgba(255,255,255,.86);font-weight:500;}
+  .ask:last-child{border-bottom:1px solid var(--hair-dark);}
+  .ask span{color:var(--steel);font-family:var(--mono);font-size:13px;margin-right:14px;vertical-align:middle;}
+
+  /* ---------- metafora + terminal ---------- */
+  .split{display:grid;gap:56px;grid-template-columns:1fr;align-items:start;}
+  @media (min-width:920px){ .split{grid-template-columns:1fr 1fr;} }
+  .term{
+    background:#000;border-radius:16px;border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);overflow:hidden;
+  }
+  .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .term-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18);}
+  .term-title{margin-left:8px;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.4);}
+  .term-body{padding:22px 20px;min-height:260px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:#c9f5ff;}
+  .term-line{opacity:0;}
+  .term-line.on{opacity:1;}
+  .term-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:5px;margin-right:8px;background:rgba(0,180,216,.16);color:var(--volt);}
+  .term-tag.ok{background:rgba(48,209,88,.16);color:var(--signal);}
+  .term-cursor{display:inline-block;width:7px;height:14px;background:var(--volt);vertical-align:middle;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion:reduce){ .term-cursor{animation:none;} }
+  .metafora-copy p{margin-top:18px;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,.72);}
+  .metafora-copy strong{color:#fff;}
+
+  /* ---------- elige (cards) ---------- */
+  .job-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:48px;}
+  @media (min-width:820px){ .job-grid{grid-template-columns:repeat(3,1fr);} }
+  .job-card{
+    text-align:left;border:1px solid var(--hair);background:#fff;border-radius:18px;padding:28px 24px;cursor:pointer;
+    transition:border-color .15s,box-shadow .15s,transform .15s;font-family:var(--sans);
+  }
+  .job-card:hover{transform:translateY(-2px);box-shadow:0 20px 34px -22px rgba(0,0,0,.18);}
+  .job-card.sel{border-color:var(--volt);box-shadow:0 0 0 3px rgba(0,180,216,.16);}
+  .job-num{font-family:var(--mono);font-size:12px;color:var(--steel);}
+  .job-name{margin-top:14px;font-size:19px;font-weight:700;letter-spacing:-0.01em;}
+  .job-desc{margin-top:10px;font-size:14.5px;line-height:1.55;color:var(--steel);}
+  .job-tag{margin-top:16px;display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--volt-dim);}
+  .job-pick{margin-top:18px;font-size:13px;font-weight:600;color:var(--steel-2);}
+  .job-card.sel .job-pick{color:var(--volt-dim);}
+  .job-card.sel .job-pick::before{content:"✓ ";}
+  .choice-strip{
+    margin-top:30px;padding:18px 24px;border-radius:14px;background:var(--paper-2);
+    font-size:15px;color:var(--graphite);display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .choice-strip b{color:var(--volt-dim);}
+
+  /* ---------- proceso ---------- */
+  .steps{margin-top:52px;display:flex;flex-direction:column;}
+  .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--hair);}
+  .step:last-child{border-bottom:1px solid var(--hair);}
+  .step-n{font-family:var(--mono);font-size:14px;color:var(--volt-dim);font-weight:700;}
+  .step-days{font-size:11.5px;color:var(--steel);margin-top:4px;}
+  .step-name{font-size:18px;font-weight:700;letter-spacing:-0.01em;}
+  .step-desc{margin-top:6px;font-size:14.5px;color:var(--steel);line-height:1.55;max-width:480px;}
+
+  /* ---------- inversion ---------- */
+  .toggle{display:inline-flex;background:rgba(255,255,255,.08);border-radius:100px;padding:4px;margin-top:8px;}
+  .toggle button{
+    font-family:var(--sans);font-size:13.5px;font-weight:600;color:rgba(255,255,255,.55);
+    background:transparent;border:0;padding:9px 20px;border-radius:100px;cursor:pointer;transition:.15s;
+  }
+  .toggle button.on{background:#fff;color:var(--ink);}
+  .price-cards{display:grid;gap:20px;grid-template-columns:1fr;margin-top:40px;}
+  @media (min-width:840px){ .price-cards{grid-template-columns:1fr 1fr;} }
+  .pcard{border:1px solid var(--hair-dark);border-radius:20px;padding:32px;background:var(--ink-2);}
+  .pcard h3{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--steel-2);}
+  .pcard .ref{margin-top:14px;font-size:15px;color:var(--steel-2);text-decoration:line-through;}
+  .pnum{margin-top:6px;font-family:var(--mono);font-size:clamp(38px,5vw,50px);font-weight:600;color:#fff;font-variant-numeric:tabular-nums;}
+  .pnum sup{font-size:20px;color:var(--steel-2);font-weight:500;}
+  .psub{margin-top:10px;font-size:14px;color:rgba(255,255,255,.55);line-height:1.5;}
+  .split-pay{margin-top:22px;display:flex;gap:10px;}
+  .split-chip{flex:1;border:1px dashed rgba(255,255,255,.25);border-radius:12px;padding:12px 14px;font-size:13px;color:rgba(255,255,255,.7);}
+  .split-chip b{display:block;font-family:var(--mono);font-size:17px;color:#fff;margin-bottom:2px;}
+  .save-note{margin-top:14px;font-size:13px;color:var(--signal);font-weight:600;min-height:18px;}
+  .metaf-box{margin-top:56px;border-top:1px solid var(--hair-dark);padding-top:36px;display:grid;gap:28px;grid-template-columns:1fr;}
+  @media (min-width:820px){ .metaf-box{grid-template-columns:1fr 1fr;} }
+  .metaf-box h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--volt);margin-bottom:12px;}
+  .metaf-box p{font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.68);}
+
+  /* ---------- futuro ---------- */
+  .future-line{font-size:clamp(20px,2.6vw,28px);font-weight:600;line-height:1.4;letter-spacing:-0.01em;max-width:760px;}
+  .future-line .volt{color:var(--volt-dim);}
+
+  /* ---------- cta final ---------- */
+  #cta{text-align:left;}
+  #cta .h-headline{font-size:clamp(34px,6vw,64px);}
+  #toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,140%);
+    background:#fff;color:var(--ink);padding:14px 22px;border-radius:100px;
+    font-size:14px;font-weight:600;box-shadow:0 20px 40px -12px rgba(0,0,0,.35);
+    transition:transform .4s cubic-bezier(.2,.9,.25,1);z-index:80;display:flex;align-items:center;gap:10px;
+  }
+  #toast.show{transform:translate(-50%,0);}
+  #toast .dot{width:8px;height:8px;border-radius:50%;background:var(--signal);}
+
+  footer{padding:44px 0;background:var(--ink);border-top:1px solid var(--hair-dark);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer .f-brand{font-size:13px;color:var(--steel-2);}
+  footer .f-meta{font-size:12px;color:var(--steel);font-family:var(--mono);}
+</style>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand-lockup">
+      <span class="t">Orlando Ram<em>í</em>rez</span>
+      <span class="x">·</span>
+      <span class="c">Caso real: JL Ruedas Motos</span>
+    </div>
+    <div class="navlinks">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#solucion">Solución</a>
+      <a href="#elige">Elige</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#inversion">Inversión</a>
+    </div>
+    <a href="#cta" class="btn btn-volt" style="padding:9px 18px;font-size:13.5px;">Empezar</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <canvas id="spark"></canvas>
+  <div class="wrap content">
+    <span class="eyebrow">Orlando Ramírez · Servicios de IA aplicada</span>
+    <h1 class="h-headline">Tu primer<br><span class="accent">empleado digital.</span></h1>
+    <p class="h-sub">No vendo campañas de redes. Construyo a alguien —o algo— que contesta WhatsApps, cotiza y pide reseñas, mientras tú te dedicas a lo que solo tú puedes hacer.</p>
+    <div class="h-ctas">
+      <a href="#diagnostico" class="btn btn-volt btn-lg">Ver un caso real</a>
+      <a href="#inversion" class="btn btn-ghost-dark btn-lg">Ir directo a la inversión</a>
+    </div>
+    <div class="h-scroll"><span class="line"></span> Caso real · Madrid, 2026</div>
+  </div>
+</section>
+
+<section id="diagnostico" class="light">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--volt-dim);">Caso real</span>
+    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.02em;max-width:720px;">Un taller de motos en Madrid, auditado sin filtro.</h2>
+    <p class="lead" style="margin-top:16px;">Antes de construir nada, audito. Esto encontré en el ecosistema digital de un taller mecánico real, con dos sedes en Madrid:</p>
+
+    <div class="stat-row">
+      <div class="stat-cell"><div class="stat-num">2<small>/10</small></div><div class="stat-label">SEO local</div></div>
+      <div class="stat-cell"><div class="stat-num">4<small>/10</small></div><div class="stat-label">Redes sociales</div></div>
+      <div class="stat-cell"><div class="stat-num">4<small>/10</small></div><div class="stat-label">Sitio web</div></div>
+      <div class="stat-cell"><div class="stat-num">9<small>/10</small></div><div class="stat-label">Potencial real</div></div>
+    </div>
+
+    <div class="quote-block">
+      "Su ecosistema digital opera a menos del 35% de su potencial real."
+      <cite>— Auditoría digital, mayo 2026</cite>
+    </div>
+
+    <div class="pivot-line">
+      <span class="strike">El primer diagnóstico hablaba de contenido y redes.</span><br>
+      <span class="live">Lo que construyo ahora habla del tiempo que te devuelve.</span>
+    </div>
+  </div>
+</section>
+
+<section id="problema" class="dark">
+  <div class="wrap reveal">
+    <span class="eyebrow">El día a día real</span>
+    <h2 style="font-size:clamp(26px,3.6vw,38px);font-weight:700;max-width:680px;">Dos talleres, un teléfono, y el dueño respondiendo todo.</h2>
+    <div class="ask-list">
+      <div class="ask"><span>01</span>¿Cuántas veces al día sueltas la llave inglesa para contestar un WhatsApp?</div>
+      <div class="ask"><span>02</span>¿Quién cotiza el alquiler de una scooter a un rider cuando estás con las manos en un motor?</div>
+      <div class="ask"><span>03</span>¿Quién pide la reseña de Google al cliente que se fue contento — antes de que se le olvide?</div>
+    </div>
+    <p class="lead" style="margin-top:36px;">No lo inventé: son los huecos exactos que vi en la auditoría. Y es lo que casi todo dueño de negocio piensa — si no hay retorno, ¿para qué gastar? Estoy de acuerdo. Por eso no vendo alcance. Vendo horas devueltas.</p>
+  </div>
+</section>
+
+<section id="solucion" class="ink2">
+  <div class="wrap reveal">
+    <span class="eyebrow">La forma en que contratamos, distinta</span>
+    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;max-width:640px;">No vendemos software. Contratamos un empleado.</h2>
+
+    <div class="split" style="margin-top:52px;">
+      <div class="metafora-copy">
+        <p><strong>La objeción más común:</strong> "para esto tengo a mi cuñado" o "lo hago yo mismo". Válido — hasta que ese WhatsApp llega a las 11pm y nadie contesta. Esto sí.</p>
+        <p><strong>Uno especializado en una sola tarea</strong> — la que hoy más tiempo le quita a tu negocio. No un asistente genérico que "hace de todo un poco".</p>
+        <p><strong>Uno que se ve trabajar</strong> — cada respuesta, cada cotización, cada mensaje enviado queda a la vista, en tiempo real. Nada de caja negra.</p>
+        <p><strong>Uno que nunca pide vacaciones</strong> — trabaja de noche, fines de semana, mientras tú estás con un cliente delante.</p>
+        <p>Así es como construyo para mi propio trabajo — cada tarea que se repite, su propio especialista. Esto es exactamente ese mismo sistema, ya probado con un cliente real.</p>
+      </div>
+      <div>
+        <div class="term">
+          <div class="term-bar">
+            <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+            <span class="term-title">recepcionista-b2b · en vivo</span>
+          </div>
+          <div class="term-body" id="termBody"></div>
+        </div>
+        <button class="btn btn-ghost-dark" id="replayBtn" style="margin-top:16px;font-size:13px;padding:10px 18px;">↻ Ver en acción otra vez</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="elige" class="light">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--volt-dim);">Así se elige</span>
+    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;max-width:680px;">¿Cuál construimos primero?</h2>
+    <p class="lead" style="margin-top:16px;">En este caso, tres candidatos salieron directo de la auditoría. La sesión estratégica siempre empieza así: elegimos juntos la tarea que más tiempo te quita el sueño.</p>
+
+    <div class="job-grid">
+      <button class="job-card sel" data-job="Recepcionista de alquiler B2B">
+        <div class="job-num">01</div>
+        <div class="job-name">Recepcionista de alquiler B2B</div>
+        <div class="job-desc">Responde por WhatsApp a riders que preguntan por scooters de alquiler (SYM, Honda PCX), con tarifas y disponibilidad al instante, 24/7.</div>
+        <span class="job-tag">Ahorra ~2h/día</span>
+        <div class="job-pick">Empezar por este</div>
+      </button>
+      <button class="job-card" data-job="Gestor de reseñas de Google">
+        <div class="job-num">02</div>
+        <div class="job-name">Gestor de reseñas de Google</div>
+        <div class="job-desc">Pide reseña automáticamente tras cada servicio y responde a las que ya tienes — tu perfil hoy está en 4/5 estrellas, sin nadie cuidándolo.</div>
+        <span class="job-tag">Sube tu Local Pack</span>
+        <div class="job-pick">Empezar por este</div>
+      </button>
+      <button class="job-card" data-job="Asistente de presupuestos de taller">
+        <div class="job-num">03</div>
+        <div class="job-name">Asistente de presupuestos de taller</div>
+        <div class="job-desc">El cliente manda foto y modelo por WhatsApp, recibe un presupuesto estimado al instante — tú solo confirmas los que ya vienen decididos.</div>
+        <span class="job-tag">Filtra antes de llegar a ti</span>
+        <div class="job-pick">Empezar por este</div>
+      </button>
+    </div>
+
+    <div class="choice-strip">En este caso se empezó por: <b id="choiceLabel">Recepcionista de alquiler B2B</b> — la decisión final siempre es del dueño del negocio, en la primera conversación.</div>
+  </div>
+</section>
+
+<section id="proceso" class="light-2">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="color:var(--volt-dim);">Cómo se construye</span>
+    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;max-width:640px;">Dos semanas. No seis meses.</h2>
+    <p class="lead" style="margin-top:16px;">El 80% del sistema ya existe y está probado — lo configuramos con tu catálogo, tus precios y tu forma de hablar.</p>
+    <div class="steps">
+      <div class="step">
+        <div><div class="step-n">01</div><div class="step-days">Días 1–3</div></div>
+        <div><div class="step-name">Diagnóstico y diseño</div><div class="step-desc">Definimos el guion exacto de conversación con tus tarifas reales de alquiler y taller.</div></div>
+      </div>
+      <div class="step">
+        <div><div class="step-n">02</div><div class="step-days">Días 4–8</div></div>
+        <div><div class="step-name">Configuración y entrenamiento</div><div class="step-desc">Se conecta a tu WhatsApp de negocio y aprende tu catálogo, precios y tono de marca.</div></div>
+      </div>
+      <div class="step">
+        <div><div class="step-n">03</div><div class="step-days">Días 9–11</div></div>
+        <div><div class="step-name">Beta contigo</div><div class="step-desc">Lo pruebas en conversaciones reales antes de que hable con un cliente sin supervisión.</div></div>
+      </div>
+      <div class="step">
+        <div><div class="step-n">04</div><div class="step-days">Días 12–14</div></div>
+        <div><div class="step-name">Lanzamiento</div><div class="step-desc">Entra en producción. Tú ves cada conversación desde el panel, en vivo.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inversion" class="dark">
+  <div class="wrap reveal">
+    <span class="eyebrow">La inversión</span>
+    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;max-width:640px;">Precio de primer caso, no de catálogo.</h2>
+    <p class="lead" style="margin-top:16px;">Cada nuevo caso real empieza con un precio de lanzamiento — más bajo que el de configuración estándar, a cambio de ser el primero en probarlo.</p>
+
+    <div class="price-cards">
+      <div class="pcard">
+        <h3>Alta del empleado digital</h3>
+        <div class="ref">Configuración estándar: 3.000€</div>
+        <div class="pnum">297<sup>€</sup></div>
+        <div class="psub">Precio de lanzamiento para los primeros casos reales. Un solo pago, dividido en dos partes.</div>
+        <div class="split-pay">
+          <div class="split-chip"><b>148,50€</b>hoy, al confirmar</div>
+          <div class="split-chip"><b>148,50€</b>contra entrega, día 14</div>
+        </div>
+      </div>
+      <div class="pcard">
+        <h3>Nómina mensual</h3>
+        <div class="toggle" role="tablist">
+          <button class="on" id="toggleM" role="tab">Mensual</button>
+          <button id="toggleA" role="tab">Anual</button>
+        </div>
+        <div class="pnum" id="maintNum">97<sup>€/mes</sup></div>
+        <div class="psub">Mantenimiento, monitoreo y mejoras del empleado digital ya construido.</div>
+        <div class="save-note" id="saveNote"></div>
+      </div>
+    </div>
+
+    <div class="metaf-box">
+      <div>
+        <h4>La metáfora</h4>
+        <p>Es como dar de alta a un empleado real: hoy pagas la selección y la formación. Después, solo su nómina — mucho menor que un sueldo, sin bajas, sin vacaciones, sin errores por cansancio.</p>
+      </div>
+      <div>
+        <h4>Por qué el número es bajo</h4>
+        <p>Un empleado a jornada completa cuesta desde 24.000€/año. Si este te devuelve un par de horas al día, se paga solo en menos de 3 meses — y tú te quedas con el sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap reveal">
+    <p class="future-line">Esto es lo que ya funciona hoy, en talleres y negocios reales. <span class="volt">Cuando la próxima ola de IA llegue, ya la tendrás instalada</span> — y serás de los primeros en usarla, no de los últimos en enterarte.</p>
+  </div>
+</section>
+
+<section id="cta" class="ink2">
+  <div class="wrap reveal">
+    <span class="eyebrow">Hablemos</span>
+    <h2 class="h-headline">¿Qué tarea le<br><span class="accent">quita más tiempo a tu negocio?</span></h2>
+    <p class="h-sub">Empezamos con una sesión estratégica corta: en menos de una hora sabemos cuál debería ser tu primer empleado digital, y en 14 días está trabajando.</p>
+    <div class="h-ctas">
+      <a href="mailto:cimoves.com@gmail.com?subject=Quiero%20mi%20primer%20empleado%20digital" class="btn btn-volt btn-lg" id="confirmBtn">Escríbeme y empezamos</a>
+      <a href="#diagnostico" class="btn btn-ghost-dark btn-lg">Volver a revisar el caso</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="f-brand">Orlando Ramírez — servicios de IA aplicada a negocios reales</span>
+    <span class="f-meta">Propuesta · JL Ruedas Motos Group SL · 2026</span>
+  </div>
+</footer>
+
+<div id="toast"><span class="dot"></span><span id="toastText">Perfecto — coordinemos el primer pago.</span></div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll */
+  var els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+    },{threshold:.14});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('vis'); });
+  }
+
+  /* spark canvas */
+  var canvas = document.getElementById('spark');
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio||1, 2);
+  var W,H,pts=[];
+  function size(){
+    W = canvas.parentElement.offsetWidth; H = canvas.parentElement.offsetHeight;
+    canvas.width = W*dpr; canvas.height = H*dpr; canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function seedPts(n){
+    pts = [];
+    for(var i=0;i<n;i++){
+      pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.6,a:Math.random()*.5+.15});
+    }
+  }
+  size(); seedPts(70);
+  window.addEventListener('resize', function(){ size(); seedPts(70); });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var g = ctx.createRadialGradient(W*0.5,H*0.32,0,W*0.5,H*0.32,Math.max(W,H)*0.6);
+    g.addColorStop(0,'rgba(0,180,216,0.14)');
+    g.addColorStop(1,'rgba(0,180,216,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    pts.forEach(function(p){
+      if(!reduced){ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0; }
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,180,216,'+p.a+')'; ctx.fill();
+    });
+    if(!reduced) requestAnimationFrame(draw); else requestAnimationFrame(function(){});
+  }
+  draw();
+
+  /* terminal demo */
+  var lines = [
+    {tag:'WHATSAPP', text:'Mensaje nuevo — Carlos R.: "hola quiero alquilar una scooter para repartos"'},
+    {tag:'IA', text:'Leyendo intención → Alquiler B2B detectado'},
+    {tag:'IA', text:'Consultando catálogo → SYM Symphony 190€/mes disponible en Vallecas'},
+    {tag:'IA', text:'Redactando respuesta con tarifas, disponibilidad y condiciones'},
+    {tag:'OK', ok:true, text:'Enviado por WhatsApp — tiempo de respuesta: 6 segundos'},
+    {tag:'OK', ok:true, text:'Guardado en agenda de seguimiento para mañana 10:00'}
+  ];
+  var termBody = document.getElementById('termBody');
+  var timers = [];
+  function runDemo(){
+    termBody.innerHTML='';
+    timers.forEach(function(t){ clearTimeout(t); }); timers=[];
+    lines.forEach(function(l,i){
+      var row = document.createElement('div');
+      row.className='term-line';
+      row.innerHTML = '<span class="term-tag'+(l.ok?' ok':'')+'">'+l.tag+'</span>'+l.text;
+      termBody.appendChild(row);
+      timers.push(setTimeout(function(){ row.classList.add('on'); },  reduced ? 0 : i*750+250));
+    });
+    var cur = document.createElement('span'); cur.className='term-cursor';
+    timers.push(setTimeout(function(){ termBody.appendChild(cur); }, reduced? 0 : lines.length*750+250));
+  }
+  runDemo();
+  document.getElementById('replayBtn').addEventListener('click', runDemo);
+
+  /* job cards */
+  var cards = document.querySelectorAll('.job-card');
+  var label = document.getElementById('choiceLabel');
+  cards.forEach(function(c){
+    c.addEventListener('click', function(){
+      cards.forEach(function(x){ x.classList.remove('sel'); });
+      c.classList.add('sel');
+      label.textContent = c.getAttribute('data-job');
+    });
+  });
+
+  /* pricing toggle */
+  var mBtn=document.getElementById('toggleM'), aBtn=document.getElementById('toggleA');
+  var maintNum=document.getElementById('maintNum'), saveNote=document.getElementById('saveNote');
+  var MONTHLY=97, ANNUAL=970;
+  function setMonthly(){
+    mBtn.classList.add('on'); aBtn.classList.remove('on');
+    maintNum.innerHTML = MONTHLY+'<sup>€/mes</sup>';
+    saveNote.textContent='';
+  }
+  function setAnnual(){
+    aBtn.classList.add('on'); mBtn.classList.remove('on');
+    maintNum.innerHTML = ANNUAL+'<sup>€/año</sup>';
+    saveNote.textContent = 'Pagas 10 meses, ahorras '+(MONTHLY*12-ANNUAL)+'€ al año';
+  }
+  mBtn.addEventListener('click', setMonthly);
+  aBtn.addEventListener('click', setAnnual);
+  setMonthly();
+
+  /* confirm toast */
+  var toast=document.getElementById('toast');
+  document.getElementById('confirmBtn').addEventListener('click', function(){
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 3200);
+  });
+})();
+</script>
