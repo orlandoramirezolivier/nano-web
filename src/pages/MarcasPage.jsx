@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBuilding, faHammer, faRocket, faAtom,
   faRotate, faSun, faHandshake, faPalette,
-  faHotel, faBullhorn, faArrowRight,
+  faHotel, faBullhorn, faArrowRight, faCircleNodes,
 } from '@fortawesome/free-solid-svg-icons'
 
 // ─── Status meta ──────────────────────────────────────────────────────────────
@@ -19,6 +19,18 @@ const STATUS_META = {
 
 // ─── Brands registry ─────────────────────────────────────────────────────────
 const MARCAS = [
+  // ── NANO (RAÍZ) — hub del ecosistema, no una startup del portafolio ────────
+  {
+    id: 'nano',
+    name: 'Nano',
+    tagline: 'Marca personal de Orlando Ramírez — hub y family office que coordina y distribuye todas las demás marcas',
+    sector: 'Family Office · Hub',
+    status: 'activa',
+    color: '#0A0A0A',
+    icon: faCircleNodes,
+    group: 'activa',
+  },
+
   // ── ACTIVAS ────────────────────────────────────────────────────────────────
   {
     id: 'cimoves',
